@@ -4,7 +4,7 @@
 @section('body')
     <h4>Home page</h4>
 
-    <form action="{{route('posts.store')}}" method="post">
+    <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data"> 
         @csrf
         <pre>
             
@@ -25,6 +25,10 @@
         <div class="form_col">
             <label>Confirm Password</label>
             <input type="text" name="confirm_password">
+        </div>
+        <div class="form_col">
+            <label>Photo</label>
+            <input type="file" name="photo">
         </div>
         <div>
             <input type="submit" value="Submit">

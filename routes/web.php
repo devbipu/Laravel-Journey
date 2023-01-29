@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StorageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,6 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    $data = dns_get_record("green.com", DNS_MX);
-    return $data;
     return view('welcome');
 })->name('home');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthFormValidator;
+use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     /**
@@ -33,11 +34,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AuthFormValidator $request)
+    public function store(/*AuthFormValidator*/ Request $request)
     {
-        //
-        //dd($request);
-        $valid = $request->validated(); 
+        //$valid = $request->validated(); 
+        $file = $request->file('photo');
+
+
+        // Storage::disk('local')->put('')
+
+
+        if ($request->hasFile('photo')) {
+            return "Have File";
+        }
         return $valid;
     }
 
