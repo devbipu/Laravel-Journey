@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +33,4 @@ Route::prefix('frontend')->name('front.')->group(function(){
 
 });
 
+Route::resource('posts', PostController::class);
