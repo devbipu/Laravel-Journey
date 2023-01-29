@@ -17,6 +17,8 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
+    $data = dns_get_record("green.com", DNS_MX);
+    return $data;
     return view('welcome');
 })->name('home');
 
@@ -32,5 +34,6 @@ Route::prefix('frontend')->name('front.')->group(function(){
     })->name('contact');
 
 });
+
 
 Route::resource('posts', PostController::class);

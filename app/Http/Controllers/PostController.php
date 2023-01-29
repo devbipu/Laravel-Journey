@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\AuthFormValidator;
 class PostController extends Controller
 {
     /**
@@ -33,17 +33,12 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthFormValidator $request)
     {
         //
-        $request->validate([
-            'name'  => 'required',
-            'email'  => 'required',
-            'password'  => 'required',
-            'confirm_password'  => 'required',
-        ]);
-
-        return $request;
+        //dd($request);
+        $valid = $request->validated(); 
+        return $valid;
     }
 
     /**
