@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AuthFormValidator extends FormRequest
 {
-    protected $stopOnFirstFailure = false; //stop request on 1st error
+    //protected $stopOnFirstFailure = false; //stop request on 1st error
     //protected $redirect = '/contact'; //Redirect to path route if request validator fail
     //protected $redirectRoute  = 'front.contact'; //Redirect to Name route if validator fail 
     

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Country;
+use App\Models\District;
 use App\Models\UserAddress;
 
 class User extends Authenticatable
@@ -46,7 +48,14 @@ class User extends Authenticatable
     /**
      * Make relation with address table by user address id
      */
-    public function address(){
-        return $this->belongsTo(UserAddress::class, 'address_id');
+    public function address()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+
+    public function country()
+    {
+        return $this->hasOneThrough(Country::class, UserAddress::class);
     }
 }
