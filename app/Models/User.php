@@ -56,11 +56,11 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->hasOneThrough(Country::class, UserAddress::class);
+        return $this->hasManyThrough(Country::class, UserAddress::class);
     }
 
     public function userCountry()
     {
-        return $this->belongsToMany(Country::class)->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(Country::class, 'country_user', 'user_id', 'country_id')->withPivot('status')->withTimestamps();
     }
 }

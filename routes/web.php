@@ -2,37 +2,37 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\StorageController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\DB;
+
 
 Route::get('/', function () {
-    return view('welcome');
+    // $d = DB::table('actor')->where(function($q){
+    //     $q->where('first_name', 'JENNIFER');
+    //     $q->orWhere('last_name', 'Davis');
+    // })
+    // ->get();
+
+    // $d = DB::table('address')->select(['district', DB::raw('COUNT(district) as `count`')])
+    // ->groupBy('district')
+    // ->orderBy('count', 'desc')
+    // ->get();
+    /*
+
+    SELECT *, COUNT(*) as `district_cont` FROM `address`
+GROUP BY `district`
+ORDER BY district ASC
+
+    */
+
+
+    $d = DB::table("staff")
+    ->leftJoin('address as addr', 'staff.address_id', '=', 'addr.address_id')
+    ->select(['staff.*', 'addr.address_id', 'addr.address'])
+    ->get();
+    // $encoded = json_encode( utf8ize( $d ) );
+    dd($d);
+    return $encoded;
 })->name('home');
-
-
-Route::prefix('frontend')->name('front.')->group(function(){
-    Route::get('/about/{id}/profile', function (Request $request, $id) {
-        return view('about', compact('id'));
-    })->name('about');
-
-
-    Route::get('/contact', function () {
-        return view('contact');
-    })->name('contact');
-
-});
-
-
-Route::resource('posts', PostController::class);

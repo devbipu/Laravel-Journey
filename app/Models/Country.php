@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\District;
 use App\Models\User;
+use App\Models\UserAddress;
 
 class Country extends Model
 {
@@ -14,12 +15,16 @@ class Country extends Model
 
     public function district()
     {
-        return $this->hasOne(District::class);
+        return $this->hasMany(District::class);
     }
 
 
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function userAddress(){
+        return $this->hasMany(UserAddress::class);
     }
 }
