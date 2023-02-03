@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthFormValidator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Country;
+
+
 class PostController extends Controller
 {
     /**
@@ -55,9 +58,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Country $country)
     {
-        //
+        return view('about', compact('country'));
     }
 
     /**

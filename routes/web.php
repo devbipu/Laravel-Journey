@@ -7,32 +7,17 @@ use App\Http\Controllers\StorageController;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Country;
 
-Route::get('/', function () {
-    // $d = DB::table('actor')->where(function($q){
-    //     $q->where('first_name', 'JENNIFER');
-    //     $q->orWhere('last_name', 'Davis');
-    // })
-    // ->get();
+Route::get('/', function() {
+    return redirect()->action([PostController::class, 'index']);
+});
 
-    // $d = DB::table('address')->select(['district', DB::raw('COUNT(district) as `count`')])
-    // ->groupBy('district')
-    // ->orderBy('count', 'desc')
-    // ->get();
-    /*
-
-    SELECT *, COUNT(*) as `district_cont` FROM `address`
-GROUP BY `district`
-ORDER BY district ASC
-
-    */
-
-
-    $d = DB::table("staff")
-    ->leftJoin('address as addr', 'staff.address_id', '=', 'addr.address_id')
-    ->select(['staff.*', 'addr.address_id', 'addr.address'])
-    ->get();
-    // $encoded = json_encode( utf8ize( $d ) );
-    dd($d);
-    return $encoded;
+Route::get('/c/{id}', function (Country $id) {
+    //$c = Country::find($id);
+    return $id;
+    return view('welcome', compact('c'));
 })->name('home');
+
+
+Route::resource('getd', PostController::class);

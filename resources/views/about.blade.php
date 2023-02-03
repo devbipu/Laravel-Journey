@@ -3,6 +3,6 @@
 
 @section('body')
 	<h4>About page</h4>
-	<p>{{$id}}</p>
+	<p>{{$country}}</p>
 @endsection
 

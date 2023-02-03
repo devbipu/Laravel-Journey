@@ -10,10 +10,7 @@
         <header>
             <div>
                 <ul>
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="{{route('front.about', ['id' => 1, 'photo' => 'yes', 'canlogin' => 'yes'])}}">About</a></li>
-                    <li><a href="{{route('front.contact')}}">Contact</a></li>
-                    <li><a href="{{route('posts.index')}}">Posts</a></li>
+                    <li><a href="{{route('home', ['id' => 1])}}">Home</a></li>
                 </ul>
             </div>
         </header>
