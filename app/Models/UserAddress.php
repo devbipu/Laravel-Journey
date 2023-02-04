@@ -4,15 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Scopes\UserDataByAddressScope;
 
-use App\Models\User;
-use App\Models\UserAddress;
-use App\Models\Country;
-use App\Models\District;
+use App\Models\{
+    User, UserAddress, Country, District
+};
 
 class UserAddress extends Model
 {
     use HasFactory;
+
+    //Global Scope
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserDataByAddressScope);
+    }
+
 
     public function user()
     {
@@ -28,4 +37,10 @@ class UserAddress extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    // //scops
+    // public function scopeUserAdressId($q, $d)
+    // {
+    //     return $q->whereUserAddressId($d);
+    // }
 }

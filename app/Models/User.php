@@ -45,12 +45,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeUserAddId($q, $v){
+        return $q->whereUserAddressId($v);
+    }
+
+    //scops
+    public function scopeUserAdressId($q, $d)
+    {
+        return $q->whereIn('user_address_id', $d);
+    }
+
     /**
      * Make relation with address table by user address id
      */
     public function address()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasOne(UserAddress::class);
     }
 
 
@@ -61,6 +71,7 @@ class User extends Authenticatable
 
     public function userCountry()
     {
-        return $this->belongsToMany(Country::class, 'country_user', 'user_id', 'country_id')->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(Country::class, 'country_user', 'user_id', 'country_id');
+        //->withPivot('status')->withTimestamps();
     }
 }
