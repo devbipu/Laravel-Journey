@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Scope;
 
 class UserDataByAddressScope implements Scope
 {
-    $args = array();
+    public $args = array();
 
+    /**
+     * @param relation name
+     * @return 
+    */
     function __construct($datas = array())
     {
         // code...

@@ -19,7 +19,7 @@ class UserAddress extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope(new UserDataByAddressScope);
+        static::addGlobalScope(new UserDataByAddressScope(['user', 'country', 'district']));
     }
 
 

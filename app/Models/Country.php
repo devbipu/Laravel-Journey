@@ -27,4 +27,9 @@ class Country extends Model
     public function userAddress(){
         return $this->hasMany(UserAddress::class);
     }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imagable');
+    }
 }

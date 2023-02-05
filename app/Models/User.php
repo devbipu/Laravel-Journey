@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Country;
-use App\Models\District;
-use App\Models\UserAddress;
+use App\Models\{
+    Country, Image, UserAddress, District
+};
 
 class User extends Authenticatable
 {
@@ -73,5 +73,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Country::class, 'country_user', 'user_id', 'country_id');
         //->withPivot('status')->withTimestamps();
+    }
+
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imagable');
     }
 }
