@@ -12,16 +12,16 @@ use App\Models\{
 };
 
 Route::get('/', function() {
-    // $user = User::UserAddId(8)
-    // ->with(['address'])->get();
+    $user = User::with('image')->get();
+    $country = Country::with('image')->find(1);
 
     // $data = UserAddress::with(['user' => function($q){
     //     $q->UserAdressId([10, 9, 7, 4]);
     // }])->get();
 
-    $data = UserAddress::get();
+    //$data = UserAddress::get();
 
-    return $data->toArray();
+    return $user->toArray();
 
     dd($data);
     return redirect();

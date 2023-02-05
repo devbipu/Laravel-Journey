@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Image;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,8 +22,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        
+        //seeding database via Factory;
+        Image::factory(10)->create();
+
         $this->call([
-            UserSeeder::class,
+            //UserSeeder::class,
         ]);
     }
 }
