@@ -11,9 +11,11 @@ use App\Models\{
     Country, Image, UserAddress, District
 };
 
+use App\Supports\Helpers\DateTimeHelper;
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, DateTimeHelper;
 
     /**
      * The attributes that are mass assignable.
@@ -75,9 +77,26 @@ class User extends Authenticatable
         //->withPivot('status')->withTimestamps();
     }
 
-
+    //Polymarphic relations 
     public function image()
     {
         return $this->morphMany(Image::class, 'imagable');
+    }
+
+    /**
+     * Accessor and Mutator 
+     */
+    public function getCreatedAtAttribute($data)
+    {
+        return $this->makeDate(data:$data, formate: 'd-M-Y');
+    }
+    public function getUpdatedAtAttribute($data)
+    {
+        return $this->makeDate(data:$data, formate: 'd-M-Y');
+    }
+
+    public function setNameAttribute($data)
+    { 
+        $this->attribute['name'] = ucwords($data); 
     }
 }

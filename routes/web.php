@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\StorageController;
-
-use Illuminate\Support\Facades\DB;
 
 use App\Models\{
     Country, User, UserAddress
@@ -13,7 +12,7 @@ use App\Models\{
 
 Route::get('/', function() {
     $user = User::with('image')->get();
-    $country = Country::with('image')->find(1);
+    $country = Country::with('image')->get();
 
     // $data = UserAddress::with(['user' => function($q){
     //     $q->UserAdressId([10, 9, 7, 4]);
@@ -21,10 +20,9 @@ Route::get('/', function() {
 
     //$data = UserAddress::get();
 
-    return $user->toArray();
-
-    dd($data);
-    return redirect();
+    //return $user->toArray();
+    return $user;
+    dd($user, $country);
 });
 
 Route::get('/c', function () {

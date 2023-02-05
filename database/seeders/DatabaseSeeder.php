@@ -4,10 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Supports\Database\TruncateTable;
 use App\Models\Image;
 
 class DatabaseSeeder extends Seeder
 {
+    use TruncateTable; 
+
     /**
      * Seed the application's database.
      *
@@ -22,9 +25,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        
-        //seeding database via Factory;
+        $this->forgenKeyCheckDisable();
+        $this->truncate('images');
         Image::factory(10)->create();
+        $this->forgenKeyCheckEnable();
+
 
         $this->call([
             //UserSeeder::class,
