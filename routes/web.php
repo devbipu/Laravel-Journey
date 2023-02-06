@@ -13,6 +13,21 @@ use App\Models\{
 Route::get('/', function() {
     $user = User::with('image')->get();
     $country = Country::with('image')->get();
+    
+    return $user->groupBy(function($item, $key){
+        return $item['email']; substr($item['created_at'], 3, 3);
+    });
+
+
+
+    return $user->map(function($d) {
+        if ($d->id == 2) {
+            return false;
+            //$d->email_verified_at = date('d-M-Y', time());
+        }
+        return $d->only('name', 'email');
+    });
+
 
     // $data = UserAddress::with(['user' => function($q){
     //     $q->UserAdressId([10, 9, 7, 4]);
@@ -21,7 +36,7 @@ Route::get('/', function() {
     //$data = UserAddress::get();
 
     //return $user->toArray();
-    return $user;
+    
     dd($user, $country);
 });
 
