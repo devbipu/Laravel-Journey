@@ -7,15 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\{
-    Country, Image, UserAddress, District
-};
-
-use App\Supports\Helpers\DateTimeHelper;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, DateTimeHelper;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -46,57 +41,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function scopeUserAddId($q, $v){
-        return $q->whereUserAddressId($v);
-    }
-
-    //scops
-    public function scopeUserAdressId($q, $d)
-    {
-        return $q->whereIn('user_address_id', $d);
-    }
-
-    /**
-     * Make relation with address table by user address id
-     */
-    public function address()
-    {
-        return $this->hasOne(UserAddress::class);
-    }
-
-
-    public function country()
-    {
-        return $this->hasManyThrough(Country::class, UserAddress::class);
-    }
-
-    public function userCountry()
-    {
-        return $this->belongsToMany(Country::class, 'country_user', 'user_id', 'country_id');
-        //->withPivot('status')->withTimestamps();
-    }
-
-    //Polymarphic relations 
-    public function image()
-    {
-        return $this->morphMany(Image::class, 'imagable');
-    }
-
-    /**
-     * Accessor and Mutator 
-     */
-    public function getCreatedAtAttribute($data)
-    {
-        return $this->makeDate(data:$data, formate: 'd-M-Y');
-    }
-    public function getUpdatedAtAttribute($data)
-    {
-        return $this->makeDate(data:$data, formate: 'd-M-Y');
-    }
-
-    public function setNameAttribute($data)
-    { 
-        $this->attributes['name'] = ucwords($data); 
-    }
 }
