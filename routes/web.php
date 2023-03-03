@@ -32,11 +32,15 @@ require __DIR__.'/auth.php';
 
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
-    Route::namespace('Auth')->group(function(){
+    Route::namespace('Auth')->middleware('guest:admin')->group(function(){
         Route::get('login', 'AuthenticatedSessionController@create')->name('login');
         Route::post('login', 'AuthenticatedSessionController@store')->name('loginattempt');
     });
-    Route::get('superdashboard', function(){
-        return view('admin.dashbaord');
-    })->name('dashboard');
+    Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+    Route::middleware(['admin.auth'])->group(function(){
+        Route::get('superdashboard', function(){
+            return view('admin.dashbaord');
+        })->name('dashboard');
+    });
+    
 });
