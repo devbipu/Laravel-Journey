@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permission_user', function(Blueprint $table){
-            $table->unsignedBigIngeger('user_id');
-            $table->unsignedBigIngeger('permission_id');
-            $table->primary(['user_id', 'permission_id']);
+            $table->unsignedBigInteger('permission_id');
+            $table->unsignedBigInteger('user_id');
+            $table->primary(['permission_id', 'user_id']);
         });
     }
 

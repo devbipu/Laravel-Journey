@@ -7,10 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
-use App\Models\User;
-use App\Models\Country;
-use App\Models\District;
-use App\Models\UserAddress;
+use App\Models\{User, Country, District, UserAddress, Role, Permission};
 
 
 
@@ -70,5 +67,20 @@ class UserSeeder extends Seeder
         //     $row->user_id = $faker->numberBetween($min=1, $max=9);
         //     $row->save();
         // }
+
+        $user = User::insert([
+            ['name' => 'User one', 'email' => 'userone@gmail.com', 'password' => bcrypt('password')],
+            ['name' => 'Editor', 'email' => 'editor@gmail.com', 'password' => bcrypt('password')],
+            ['name' => 'Author', 'email' => 'author@gmail.com', 'password' => bcrypt('password')]
+        ]);
+
+        $roles = Role::insert([
+            ['name' => 'editor', 'slug' => 'editor'],
+            ['name' => 'author', 'slug' => 'author']
+        ]);
+        $permissions = Permission::insert([
+            ['name' => 'Add Post', 'slug' => 'post-add'],
+            ['name' => 'author', 'slug' => 'post-delete']
+        ]);
     }
 }
