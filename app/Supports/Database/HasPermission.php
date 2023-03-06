@@ -28,18 +28,28 @@ trait HasPermission{
 	}
 
 
-	public function hasRols(...$roles)
+	public function hasRole(...$roles)
 	{
 		foreach($roles as $role){
-			if ($this->roles->contains('slug', $role->slug)) {
+			if ($this->roles->contains('slug', $role)) {
 				return true;
 			}
 			return false;
 		}
 	}
 
-	public function hasPermissionThroughRole(...$permissions)
+
+	/*Check the permission and return */
+	public function hasPermissionTo($permission)
 	{
+		return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+	}
+
+
+
+	public function hasPermissionThroughRole($permissions)
+	{
+		// dd($permissions->roles);
 		foreach ($permissions->roles as $role) {
 			if ($this->roles->contains($role)) {
 				return true;
@@ -48,13 +58,6 @@ trait HasPermission{
 		}
 	}
 
-
-
-	/*Check the permission and return */
-	public function hasPermissionTo($permission)
-	{
-		return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
-	}
 
 
 	/**

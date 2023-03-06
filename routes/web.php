@@ -18,18 +18,28 @@ use App\Http\Controllers\Backend\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 Route::group(['middleware' => ['auth', 'verified'] ], function(){
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::group(['middleware' => 'permission:author'], function(){
+    Route::get('/testrole', function () {
+        echo "Editor Page";
+    })->name('testrole');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';
 
@@ -45,5 +55,4 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
             return view('admin.dashbaord');
         })->name('dashboard');
     });
-    
 });
