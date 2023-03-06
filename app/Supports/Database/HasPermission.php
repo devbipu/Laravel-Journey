@@ -4,7 +4,7 @@ namespace App\Supports\Database;
 
 use App\Models\{
 	User, Role, Permission
-}
+};
 
 
 
@@ -53,7 +53,7 @@ trait HasPermission{
 	/*Check the permission and return */
 	public function hasPermissionTo($permission)
 	{
-		return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission)
+		return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
 	}
 
 
@@ -77,7 +77,7 @@ trait HasPermission{
 	*/
 	public function permissions()
 	{
-		$this->belongsToMany(Permission::class);
+		return $this->belongsToMany(Permission::class);
 	}
 
 	/*
@@ -85,6 +85,6 @@ trait HasPermission{
 	*/
 	public function roles()
 	{
-		$this->belongsToMany(Role::class);
+		return $this->belongsToMany(Role::class);
 	}
 }
