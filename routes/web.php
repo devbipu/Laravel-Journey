@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\DashboardController;
+use Illuminate\Support\Facades\Gate;
+// use Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,9 @@ use App\Http\Controllers\Backend\DashboardController;
 */
 
 Route::get('/', function () {
+    // if (Gate::allows('test-gate', auth()->user())) {
+    //     return "ok";
+    // }
     return view('welcome');
 });
 
