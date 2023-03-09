@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('admin.')->gr
 
     Route::name('post.')->group(function(){
         Route::get('posts', [PostController::class, 'index'])->name('show');
-        Route::get('posts/edit', [PostController::class, 'edit'])->name('edit');
+        Route::get('posts/edit', [PostController::class, 'edit'])->name('edit')->middleware('permission');
         Route::get('posts/create', [PostController::class, 'create'])->name('create');
     });
 });

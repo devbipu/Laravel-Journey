@@ -23,9 +23,10 @@ class PostController extends Controller
     public function edit()
     {   
         // $permissions = Permission::get();
-        if (Gate::allows('post-edit')) {
+        // if (Gate::allows('post-edit')) {
+        // }
+        
             return view('backend.post.edit');
-        }
         return redirect()->back()->with('message', "You don't have enaugh permission");
     }
 
