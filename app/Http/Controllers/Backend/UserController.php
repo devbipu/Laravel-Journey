@@ -29,11 +29,11 @@ class UserController extends Controller
     {
         $permissions = Permission::get();
         $roles = Role::get();
-        foreach ($roles as $role) {
-            $role->permissions()->attach($permissions->random());
-        }
+        // foreach ($roles as $role) {
+        //     $role->permissions()->attach($permissions->random());
+        // }
 
-        return $permissions;
+        // return $permissions;
         return view('backend.user.permission');
     }
 }

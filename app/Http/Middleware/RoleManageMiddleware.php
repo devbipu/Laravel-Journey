@@ -13,15 +13,16 @@ class RoleManageMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $permission= null): Response
+    public function handle(Request $request, Closure $next, $permission = null): Response
     {
+        // dd($request->user()->role->permissions);
+
         // $user = Auth::user();
         if (!$request->user()->role) {
-            abort(404);
-        };
-
-        if ($request->user()->role->permissions != null && !$request->user()->can($permission)) {
-            abort(404);
+            abort(403, "You dont't have enaugh access");
+        };        
+        if ($permission != null && !$request->user()->can($permission)) {
+            abort(403, "You dont't have enaugh access");
         }
         return $next($request);
     }

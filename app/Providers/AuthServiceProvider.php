@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-         try {
+        try {
             Permission::get()->map(function($permission){
                 Gate::define($permission->slug, function($user) use($permission){
                     return (bool)$user->hasPermission($permission);

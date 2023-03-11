@@ -42,7 +42,7 @@
                                             {{ $user->email }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $user->role->name }}
+                                            {{ $user->role?->name }}
                                         </td>
                                     </tr>
                                 @endforeach

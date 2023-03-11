@@ -40,9 +40,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('admin.')->gr
     Route::get('role', [UserController::class, 'userRoleShow'])->name('users.roleShow');
     Route::get('permissions', [UserController::class, 'userPermissionShow'])->name('users.permissionShow');
 
-    Route::name('post.')->group(function(){
-        Route::get('posts', [PostController::class, 'index'])->name('show');
-        Route::get('posts/edit', [PostController::class, 'edit'])->name('edit')->middleware('permission');
+    Route::middleware('auth')->name('post.')->group(function(){
+        Route::get('posts', [PostController::class, 'index'])->name('show')->middleware('permission:post-view');
+        Route::get('posts/edit', [PostController::class, 'edit'])->name('edit')->middleware('permission:post-edit');
         Route::get('posts/create', [PostController::class, 'create'])->name('create');
     });
 });
