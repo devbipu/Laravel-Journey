@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
 // use Auth;
+use App\Http\Controllers\Api\FileController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// Route::get('/v2/testapi/{id}', function($id) {
-//     if (!Gate::allows('test-gate', Auth::user())) {
-//         // abort(404);
-//         return 'Faild';
-//     }
-//     // return "ok";
-// });
+Route::prefix('v1')->group(function(){
+    Route::post('/upload', [FileController::class, 'upload']);
+});

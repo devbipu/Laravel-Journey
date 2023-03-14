@@ -39,10 +39,13 @@ trait HasPermission{
 	}
 
 
-	/*Check the permission and return */
+	/**
+	 * Check the user permission  
+	 * @return boolean 
+	 */
 	public function hasPermissionTo($permission)
 	{
-		return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+		return (bool) $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
 	}
 
 

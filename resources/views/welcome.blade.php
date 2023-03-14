@@ -32,7 +32,7 @@
             @endif
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                {{ auth()->user()->id }}
+                {{ auth()->user()?->id }}
                 <div class="flex justify-center">
                     @auth('admin')
                         <a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
