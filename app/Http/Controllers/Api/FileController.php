@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\UserResource;
+
+use App\Models\User;
 
 class FileController extends Controller
 {
@@ -20,5 +23,28 @@ class FileController extends Controller
         
         // Downlod file
         // return Storage::download('public/GQuXCbyaQUhjTKN3TU7hUBkZx5Sd4gHuTaJAZRRY.png');
+    }
+
+    public function getData(Request $request) 
+    {
+        return UserResource::collection(User::get());   
+    }
+
+    public function showUser(Request $request, User $user) 
+    {
+        return new UserResource($user);
+    }
+
+
+
+    public function updateUser(Request $req)
+    {
+        // return $req->all();
+        $user = User::findOrFail($req->id);
+        $user->name = $req->name;
+        $user->update();
+
+
+        return $user;
     }
 }
