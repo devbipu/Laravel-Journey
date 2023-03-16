@@ -6,16 +6,12 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Gate;
 // use Auth;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
+use App\Mail\UserEmail;
+use Illuminate\Support\Facades\Mail;
+
+
+
 
 Route::get('/', function () {
     // if (Gate::allows('test-gate', auth()->user())) {
@@ -24,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/sendmail', function (){
+    Mail::to('bipudev@gmail.com')->queue(new UserEmail());
+});
 
 Route::group(['middleware' => ['auth', 'verified'] ], function(){
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
