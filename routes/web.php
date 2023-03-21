@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 
 use App\Mail\UserEmail;
 use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client;
 
 
 
@@ -17,6 +18,56 @@ Route::get('/', function () {
     // if (Gate::allows('test-gate', auth()->user())) {
     //     return "ok";
     // }
+
+    $url = 'https://jsonplaceholder.typicode.com/todos/1';
+    $payload = json_encode([
+        'title' => 'Updated title'
+    ]);
+
+    $headers = [
+        "Content-type" => "application/json; charset=UTF-8"
+    ];
+    
+    $client = new Client(['verify' => false]);
+
+    $response = $client->patch('https://jsonplaceholder.typicode.com/todos/1', [
+        'headers'    => $headers,
+        'body'       => $payload,
+    ]);
+    $body = $response->getBody();
+    $data = json_decode($body, true);
+
+
+
+    print_r($data);
+
+    // $ch = curl_init();
+
+    // curl_setopt($ch, CURLOPT_URL, "https://jsonplaceholder.typicode.com/albums/1");
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $data = curl_exec($ch);
+    // curl_close($ch);
+
+    // echo $data; 
+
+   
+
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification
+        // $response = curl_exec($ch);
+        // curl_close($ch);
+
+        // echo $response;
+
+    die();
+
+
+
+
+
+
     return view('welcome');
 });
 
