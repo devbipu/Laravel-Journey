@@ -11,12 +11,14 @@ class UserNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    public $user;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -39,7 +41,7 @@ class UserNotification extends Notification implements ShouldQueue
         //             ->action('Notification Action', url('/'))
         //             ->line('Thank you for using our application!');
         return (new MailMessage)->subject('Welcome to my website')
-            ->view('mails.usernotify');
+            ->view('mails.usernotify')->with(['user' => $this->user]);
     }
 
     /**
@@ -52,5 +54,11 @@ class UserNotification extends Notification implements ShouldQueue
         return [
             //
         ];
+    }
+
+
+    public function failed(\Throwable $exception)
+    {
+        \Log::error('Notification failed to send: ' . $exception->getMessage());
     }
 }

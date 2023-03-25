@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Notifications\UserLoginNotification;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -26,6 +27,13 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+
+
+        $user = auth()->user();
+
+        auth()->user()->notify(new UserLoginNotification($user)); 
+        
+
 
         $request->session()->regenerate();
 

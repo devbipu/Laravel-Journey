@@ -24,7 +24,7 @@ Route::get('/', function () {
 
     foreach ($users as $user) {
         // $user->notify(new UserNotification);
-    Notification::send($user, new UserNotification);
+        Notification::send($user, new UserNotification($user));
     }
     return view('welcome');
 });
@@ -36,6 +36,7 @@ Route::get('/sendmail', function (){
 
 Route::group(['middleware' => ['auth', 'verified'] ], function(){
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/markasread/{id}', [DashboardController::class, 'markAsRead'])->name('markAsRead');
 });
 
 

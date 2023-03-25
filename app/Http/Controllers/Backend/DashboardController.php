@@ -19,4 +19,10 @@ class DashboardController extends Controller
 
         return view('dashboard');
     }
+
+    public function markAsRead($id)
+    {
+        Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
+        return back();
+    }
 }
