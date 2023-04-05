@@ -16,6 +16,8 @@ use App\Models\User;
 use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Notification;
 
+use App\Http\Controllers\SslCommerzPaymentController;
+
 Route::get('/', function () {
     // if (Gate::allows('test-gate', auth()->user())) {
     //     return "ok";
@@ -71,3 +73,18 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
         })->name('dashboard');
     });
 });
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
