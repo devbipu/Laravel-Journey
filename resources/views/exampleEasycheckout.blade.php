@@ -165,7 +165,7 @@
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" id="sslczPayBtn"
                         token="if you have any token validation"
-                        postdata="your javascript arrays or objects which requires in backend"
+                        postdata=""
                         order="If you already have the transaction generated for current order"
                         endpoint="{{ url('/pay-via-ajax') }}"> Pay Now
                 </button>
@@ -202,9 +202,12 @@
     obj.cus_addr1 = $('#address').val();
     obj.amount = $('#total_amount').val();
 
-    $('#sslczPayBtn').prop('postdata', obj);
+    $('#sslczPayBtn').attr('postdata', obj);
+
 
     (function (window, document) {
+        console.log($('#sslczPayBtn'))
+        console.log(obj)
         var loader = function () {
             var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
             // script.src = "https://seamless-epay.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR LIVE

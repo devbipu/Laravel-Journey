@@ -1,5 +1,5 @@
 <?php
-namespace App\Library\SslCommerz;
+namespace App\Supports\PaymentGateways\SslCommerz;
 
 abstract class AbstractSslCommerz implements SslCommerzInterface
 {
@@ -87,7 +87,7 @@ abstract class AbstractSslCommerz implements SslCommerzInterface
     public function formatResponse($response, $type = 'checkout', $pattern = 'json')
     {
         $sslcz = json_decode($response, true);
-
+        // return $sslcz;
         if ($type != 'checkout') {
             return $sslcz;
         } else {

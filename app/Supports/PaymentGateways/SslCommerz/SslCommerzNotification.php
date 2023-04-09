@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\SslCommerz;
+namespace App\Supports\PaymentGateways\SslCommerz;
 
 class SslCommerzNotification extends AbstractSslCommerz
 {
@@ -202,9 +202,8 @@ class SslCommerzNotification extends AbstractSslCommerz
 
         // Now, call the Gateway API
         $response = $this->callToApi($this->data, $header, $this->config['connect_from_localhost']);
-
         $formattedResponse = $this->formatResponse($response, $type, $pattern); // Here we will define the response pattern
-
+        
         if ($type == 'hosted') {
             if (!empty($formattedResponse['GatewayPageURL'])) {
                 $this->redirect($formattedResponse['GatewayPageURL']);
